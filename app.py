@@ -148,3 +148,15 @@ with tab1:
                 st.success("No anomalies detected. Continue standard flight operations.")
     else:
         st.error("Dataset not found.")
+
+        # --- Footer / Branding ---
+st.write("---")
+footer_col1, footer_col2 = st.columns(2)
+
+with footer_col1:
+    st.markdown("### Developed by: **Hussam**")
+    st.caption("Computer Science Student | LJMU Qatar")
+
+with footer_col2:
+    st.markdown("### Project Source")
+    st.markdown("[View on GitHub](https://github.com/HussamDroid/AeroPredict)")
