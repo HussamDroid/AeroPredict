@@ -5,7 +5,7 @@ import joblib
 import os
 
 # --- Page Configuration ---
-st.set_page_config(page_title="AeroPredict: Engine RUL Predictor", layout="wide")
+st.set_page_config(page_title="AeroSafe: Engine RUL Predictor", layout="wide")
 
 # Custom CSS for dark-mode metric cards
 st.markdown("""
@@ -42,7 +42,7 @@ def load_selected_data(subset):
     return df
 
 # --- MAIN UI LAYOUT ---
-st.title("AeroPredict: Predictive Maintenance Dashboard")
+st.title("AeroSafe: Predictive Maintenance Dashboard")
 
 # Create Tabs for Navigation
 tab1, tab2 = st.tabs(["Live Dashboard", "Project Overview"])

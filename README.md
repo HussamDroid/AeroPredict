@@ -1,6 +1,6 @@
-# AeroPredict: Aircraft Engine Predictive Maintenance
+# AeroSafe: Aircraft Engine Predictive Maintenance
 
-AeroPredictis a Machine Learning-powered "Digital Twin" dashboard that predicts the **Remaining Useful Life (RUL)** of turbofan engines. Built with Python and Streamlit, it leverages the industry-standard **NASA C-MAPSS dataset** to provide real-time health monitoring and failure forecasting.
+AeroSafe is a Machine Learning-powered "Digital Twin" dashboard that predicts the **Remaining Useful Life (RUL)** of turbofan engines. Built with Python and Streamlit, it leverages the industry-standard **NASA C-MAPSS dataset** to provide real-time health monitoring and failure forecasting.
 
 ## Key Features
 - **Multi-Dataset Support:** Trained on all 4 NASA subsets (FD001–FD004), handling various flight conditions (Sea Level to High Altitude) and multiple fault modes.
@@ -48,7 +48,7 @@ For a regression task like this, the "Accuracy Score" is measured by how close t
 1. **Clone the repository:**
    ```bash
    git clone [https://github.com/HussamDroid/AeroPredict.git](https://github.com/HussamDroid/AeroPredict.git)
-   cd AeroPredict
+   cd AeroSafe 
 
 2. **Install Dependencies:**
    ```bash
