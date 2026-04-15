@@ -33,15 +33,15 @@ We didn't just test on the data the model already saw. We used a Hold-Out Valida
 
 **Ground Truth:** Compared the model's "guess" against the *RUL_FD00x.txt* files, which contain the actual remaining life for those test engines.
 
-## Performance & Accuracy
+## Model Performance Metrics
 
 For a regression task like this, the "Accuracy Score" is measured by how close the prediction is to the actual remaining cycles.
 
-| Metric  | Score (Approx) | Meaning |
-| ------------- | ------------- | 
-| RMSE  | 14.2 Cycles  | On average, the model is off by about 14 flights. |
-| R<sup>2</sup> Score  | 0.88  | 88% of the variance in engine degradation is captured by the model. |
-| MAE  | 10.5 Cycles  | The typical absolute error per prediction. |
+| Metric | Score (Approx) | Meaning |
+| :--- | :--- | :--- |
+| **RMSE** | 14.2 Cycles | On average, the model is off by about 14 flight cycles. |
+| **R² Score** | 0.88 | 88% of the variance in engine degradation is captured by the model. |
+| **MAE** | 10.5 Cycles | The typical absolute error per prediction. |
 
 ## Installation & Usage
 
