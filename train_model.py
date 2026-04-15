@@ -1,32 +1,36 @@
 import pandas as pd
+import glob
 from sklearn.ensemble import RandomForestRegressor
-import joblib # To save the model
+import joblib
 
-# 1. Load and Label Data
-def prepare_data(file_path):
-    col_names = ['unit_nr', 'time_cycles', 'set1', 'set2', 'set3'] + [f's_{i}' for i in range(1, 22)]
-    df = pd.read_csv(file_path, sep='\s+', header=None, names=col_names)
+def load_all_datasets():
+    all_data = []
+    # Find all training files in the directory
+    files = glob.glob('CMAPSSData/train_FD00*.txt')
     
-    # Calculate RUL (Ground Truth)
-    max_cycle = df.groupby('unit_nr')['time_cycles'].transform('max')
-    df['RUL'] = max_cycle - df['time_cycles']
-    return df
+    col_names = ['unit_nr', 'time_cycles', 'set1', 'set2', 'set3'] + [f's_{i}' for i in range(1, 22)]
+    
+    for file in files:
+        df = pd.read_csv(file, sep='\s+', header=None, names=col_names)
+        # Calculate RUL for each file individually before merging
+        df['RUL'] = df.groupby('unit_nr')['time_cycles'].transform('max') - df['time_cycles']
+        all_data.append(df)
+    
+    return pd.concat(all_data, ignore_index=True)
 
-# 2. Feature Selection
-# We use the sensors that showed clear trends in your UI
+# Features that exist across all datasets
 features = ['s_2', 's_3', 's_4', 's_7', 's_8', 's_9', 's_11', 's_12', 's_13', 's_14', 's_15', 's_17', 's_20', 's_21']
 
-# Load data
-train_data = prepare_data('CMAPSSData/train_FD001.txt')
+print("Loading and merging all NASA C-MAPSS subsets... 📂")
+full_train = load_all_datasets()
 
-X = train_data[features]
-y = train_data['RUL']
+X = full_train[features]
+y = full_train['RUL']
 
-# 3. Train the Model
-print("Training the Random Forest model... 🛠️")
-model = RandomForestRegressor(n_estimators=100, max_depth=10, random_state=42)
+print(f"Training on {len(full_train)} total flight cycles... 🛠️")
+# Increase n_estimators for the larger dataset
+model = RandomForestRegressor(n_estimators=150, max_depth=12, n_jobs=-1, random_state=42)
 model.fit(X, y)
 
-# 4. Save the model to a file
 joblib.dump(model, 'rul_model.joblib')
-print("Model saved as 'rul_model.joblib' ✅")
+print("Universal Model saved successfully! ✅")
